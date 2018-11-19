@@ -102,3 +102,14 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# VIM backup
+*.swp
+
+# datasets - code exists to download these anyway...
+datasets/
+
+# tensorflow output
+tf_logs/
+saved_checkpoints/
+saved_models/
