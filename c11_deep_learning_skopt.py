@@ -141,7 +141,7 @@ hyperparameters = {'num_hidden_units'  : default_parameters[0],
 
 n_inputs                = 28 * 28  # MNIST
 n_outputs               = 10
-num_random_tuning_tries = 11
+num_random_tuning_tries = 50
 
 n_epochs                    = 4000
 batch_size                  = 50
@@ -331,8 +331,8 @@ def fitness(num_hidden_units, num_hidden_layers, learning_rate, keep_prob, layer
          model   = create_model(num_hidden_units, num_hidden_layers, learning_rate, keep_prob, layer_form)
          model.init_global.run()
          model.init_local.run()
-         X = model.X
-         y = model.y
+         X        = model.X
+         y        = model.y
          training = model.training
       saver   = tf.train.Saver()
       print("Current Hyperparameters  : ", hyperparameters)
@@ -348,7 +348,7 @@ def fitness(num_hidden_units, num_hidden_layers, learning_rate, keep_prob, layer
                
             # check for early stop
             loss_val = model.loss.eval(feed_dict={X: X_valid_scaled,
-                                                  y: y_valid})
+                                                  y: y_valid, training: False})
             
             if np.isinf(loss_val) or np.isnan(loss_val):
                print("Loss value is NAN - skipping this hyperparameter tuning session")
